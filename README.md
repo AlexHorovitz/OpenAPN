@@ -1,4 +1,4 @@
-AHRubyToolkit
+OpenAPN
 =============
 
-As I am transitioning from java I am keeping a running repo of things I learn along the way that might be useful to others
+This is a set of Ruby Classes designed to make it easier to send Apple Push Notifications.
