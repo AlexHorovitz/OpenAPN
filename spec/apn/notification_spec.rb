@@ -16,8 +16,8 @@ describe OpenAPN::Notify do
   describe '#packaged_message' do
     
     it "should return JSON with notification information" do
-      n = OpenAPN::Notify.new('device_token', {:alert => 'Hello iPhone', :badge => 3, :sound => 'awesome.caf'})
-      n.payload_message.should  == "{\"aps\":{\"alert\":\"Hello iPhone\",\"badge\":3,\"sound\":\"awesome.caf\"}}"
+      n = OpenAPN::Notify.new('device_token', {:alert => 'Test Apple Push Notification', :badge => 3, :sound => 'basso.caf'})
+      n.payload_message.should  == "{\"aps\":{\"alert\":\"Test Apple Push Notification\",\"badge\":3,\"sound\":\"basso.caf\"}}"
     end
     
     it "should not include keys that are empty in the JSON" do
@@ -29,15 +29,16 @@ describe OpenAPN::Notify do
   
   describe '#package_token' do
     it "should package the token" do
-      n = OpenAPN::Notify.new('<5b51030d d5bad758 fbad5004 bad35c31 e4e0f550 f77f20d4 f737bf8d 3d5524c6>', 'a')
-      Base64.encode64(n.payload_token).should == "W1EDDdW611j7rVAEutNcMeTg9VD3fyDU9ze/jT1VJMY=\n"
+      n = OpenAPN::Notify.new('<4442c326 7ede5aec becb6881 1b5f0020 c0601a32 03c06be4 55d874a2 7cec12db>', 'a')
+      $stdout.print n.payload_token
+      Base64.encode64(n.payload_token).should == "RELDJn7eWuy+y2iBG18AIMBgGjIDwGvkVdh0onzsEts=\n"
     end
   end
 
   describe '#packaged_notification' do
     it "should package the token" do
-      n = OpenAPN::Notify.new('device_token', {:alert => 'Hello iPhone', :badge => 3, :sound => 'awesome.caf'})
-      Base64.encode64(n.notification_payload).should == "AAAg3vLO/YTnAEB7ImFwcyI6eyJhbGVydCI6IkhlbGxvIGlQaG9uZSIsImJh\nZGdlIjozLCJzb3VuZCI6ImF3ZXNvbWUuY2FmIn19\n"
+      n = OpenAPN::Notify.new('device_token', {:alert => 'Test Apple Push Notification', :badge => 3, :sound => 'basso.caf'})
+      Base64.encode64(n.notification_payload).should == "AAAg3vLO/YTnAE57ImFwcyI6eyJhbGVydCI6IlRlc3QgQXBwbGUgUHVzaCBO\nb3RpZmljYXRpb24iLCJiYWRnZSI6Mywic291bmQiOiJiYXNzby5jYWYifX0=\n"
     end
   end
   
